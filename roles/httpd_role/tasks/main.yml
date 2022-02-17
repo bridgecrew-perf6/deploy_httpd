@@ -9,13 +9,13 @@
 - name: "recuperation repo git"
   git:
     repo: "https://github.com/diranetafen/static-website-example.git"
-    dest: "/home/ubuntu/dest/"
+    dest: "/home/ubuntu/dest/static-website-example"
 
-- name: "Deploiement conteneur nginx"
+- name: "Deploiement conteneur httpd"
   docker_container:
-    name: nginx
-    image: "nginx"
+    name: httpd
+    image: "httpd"
     ports:
-      - "8082:80"
+      - "8080:80"
     volumes:
-      - "/home/ubuntu/dest/static-website-example:/usr/share/nginx/html"
+      - "/home/ubuntu/dest/static-website-example:/usr/local/apache2/htdocs"
