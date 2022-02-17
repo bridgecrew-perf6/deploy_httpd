@@ -1,0 +1,21 @@
+---
+# tasks file for role_httpd
+#
+- name: "installation git"
+  package:
+   name: "git"
+   state: present
+
+- name: "recuperation repo git"
+  git:
+    repo: "https://github.com/diranetafen/static-website-example.git"
+    dest: "/home/ubuntu/dest/"
+
+- name: "Deploiement conteneur nginx"
+  docker_container:
+    name: nginx
+    image: "nginx"
+    ports:
+      - "8082:80"
+    volumes:
+      - "/home/ubuntu/dest/static-website-example:/usr/share/nginx/html"
